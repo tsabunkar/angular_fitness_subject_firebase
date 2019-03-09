@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CustomMaterialModule } from './shared/modules/material.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { TrainingComponent } from './training/training.component';
 import { CurrentTrainingComponent } from './training/current-training/current-training.component';
@@ -42,7 +43,8 @@ import { environment } from 'src/environments/environment';
     CoreModule,  // *CoreModule must be only imported onces in AppModule
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase), // *IOmporting AngularFire
-    AngularFirestoreModule // *imports firebase/firestore, only needed for database features
+    AngularFirestoreModule, // *imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // *imports firebase/auth, only needed for auth features,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 <section class="signup-form">
   <!--  fxLayoutAlign="center center" which means -> first value is for main axis and second value is for
     cross axis  -->
-  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+  <form class="form" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
     <mat-form-field hintLabel="Should be email address only">
       <!-- Using ngModel -> we are making this input field as Template forms field -->
       <input type="email" matInput placeholder="Email" ngModel name="email" email required #emailInp="ngModel">

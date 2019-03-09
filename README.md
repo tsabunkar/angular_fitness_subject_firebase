@@ -500,4 +500,20 @@ which is need to be updated, where as- set() will override the complete document
 
 
 Resource : https://github.com/angular/angularfire2/blob/master/docs/firestore/documents.md 
+
+
 =====================================================================================================
+Firebase Authentication :-
+
+In AppModule import : AngularFireAuthModule
+
+If you get Error like :-
+code: "auth/operation-not-allowed"
+message: "The given sign-in provider is disabled for this Firebase project. Enable it in the Firebase console, under the sign-in method tab of the Auth section."
+
+Which means- YOu need to enable authentication in ANgular firebase website
+ 
+Goto firebase website : Authenication (tab) > Setup signin method (click) > Email/Password (click) >
+Enable > Save
+
+To see list of users register Goto :- Users (tab)
