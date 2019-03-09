@@ -471,3 +471,33 @@ but if we have a requirement to fetch the meta data then use : snapshotChanges()
           }
         }
       );
+
+
+=====================================================================================================
+Performing CRUD operation in angular firebase :
+
+-> POST exercise document to historyExercises collection
+  this.db.collection('historyExercises').add(exercise);
+
+-> GETALL documents from  historyExercises collection
+  this.db.collection('historyExercises').valueChanges()
+
+-> Update a single document using uniqueId
+  this.db.doc('historyExercises/' + uniqueId).update({propertyToUpdate : 'new_value'})
+
+  doc() -> used to access a particular document using uniqueId(ObjectId), this method will takes
+  path to the document (i.e-collection) followed by '/' then unqiueId/ObjectId(using which we can identifiy the document uniquely)
+
+
+-> To set/Post particular document : (IT WILL OVERRIDE THE EXSITING DOCUMENT VALUE)
+  this.db.doc('historyExercises/' + uniqueId).set({propertyToUpdate : 'new_value'})
+
+Note : update() will not override the complete document, rather it will only update particular property
+which is need to be updated, where as- set() will override the complete document data.
+
+-> Delete particular Document :
+ this.db.doc('historyExercises/' + uniqueId).delete();
+
+
+Resource : https://github.com/angular/angularfire2/blob/master/docs/firestore/documents.md 
+=====================================================================================================
