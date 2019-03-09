@@ -1,0 +1,20 @@
+<!-- <button mat-button [color]="'accent'"> Click me!</button>
+<button mat-raised-button color="warn"> Click me!</button>
+<mat-icon>flight_takeoff</mat-icon>
+ -->
+<mat-sidenav-container>
+  <mat-sidenav #sideNav role="navigation">
+    <!-- ALl routes/navigation -->
+    <mat-nav-list>
+      <app-side-nav [sideNavigation]="sideNav"></app-side-nav>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- Inside mat-sidenav-content we are place the component(s) that dynamically changes while routing
+    Also mat-sidenav is above, so that effect of Angular Material website is retained -->
+    <app-header (toogleSideNav)="sideNav.toggle()"></app-header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

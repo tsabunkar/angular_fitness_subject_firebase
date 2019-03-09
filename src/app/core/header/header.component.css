@@ -1,0 +1,25 @@
+a {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+a:hover,
+a :active {
+  color: lightblue
+}
+
+.navigation-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+.logout-anchor {
+  cursor: pointer;
+}
+
+
+mat-toolbar {
+  background-color: #363946;
+}
