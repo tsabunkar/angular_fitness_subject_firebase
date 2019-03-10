@@ -21,6 +21,8 @@ import { SharedModule } from './shared/shared.module';
 import { SignupComponent } from './core/auth/signup/signup.component';
 import { LoginComponent } from './core/auth/login/login.component';
 import { environment } from 'src/environments/environment';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorHandlerInterceptorService } from './core/interceptors/error-handler.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,11 +44,14 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule, // *Importing this module which has exported RouterModule configuration of all routes and its path
     CoreModule,  // *CoreModule must be only imported onces in AppModule
     SharedModule,
-    AngularFireModule.initializeApp(environment.firebase), // *IOmporting AngularFire
+  /*   AngularFireModule.initializeApp(environment.firebase), // *IOmporting AngularFire
     AngularFirestoreModule, // *imports firebase/firestore, only needed for database features
-    AngularFireAuthModule, // *imports firebase/auth, only needed for auth features,
+    AngularFireAuthModule, // *imports firebase/auth, only needed for auth features, */
   ],
-  providers: [],
+  providers: [
+    // !Providing the error interceptor in AppModule
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptorService, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

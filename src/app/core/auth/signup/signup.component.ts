@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Observable, of } from 'rxjs';
+import { FidgetSpinnerService } from 'src/app/shared/components/fidget-spinner/fidget-spinner.service';
 
 @Component({
   selector: 'app-signup',
@@ -10,12 +12,17 @@ import { AuthService } from '../auth.service';
 export class SignupComponent implements OnInit {
 
   maxDate: Date;
+  isLoading: Observable<boolean> = of(false);
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private fidgetSpinnerService: FidgetSpinnerService
   ) { }
 
   ngOnInit() {
+    // !SPinner
+    this.isLoading = this.fidgetSpinnerService.spinnerStateChanged;
+
     this.signupPersonShouldBeEighteenYears();
 
   }

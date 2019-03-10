@@ -12,7 +12,8 @@
       <mat-hint>Please enter your password.</mat-hint>
       <mat-error>Missing password.</mat-error>
     </mat-form-field>
-    <button type="submit" mat-raised-button
+    <button *ngIf="!(isLoading | async)" type="submit" mat-raised-button
       color="primary" [disabled]="loginForm.invalid">Submit</button>
+    <app-fidget-spinner *ngIf="(isLoading | async)" ></app-fidget-spinner>
   </form>
 </section>

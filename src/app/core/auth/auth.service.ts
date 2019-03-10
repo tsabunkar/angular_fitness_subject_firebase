@@ -4,6 +4,8 @@ import { AuthData } from './models/auth-data.model';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { MatSnackBar } from '@angular/material';
+import { FidgetSpinnerService } from 'src/app/shared/components/fidget-spinner/fidget-spinner.service';
 
 
 @Injectable({
@@ -18,7 +20,9 @@ export class AuthService {
 
   constructor(
     private router: Router,
-    private ngFireAuth: AngularFireAuth
+    private snackBar: MatSnackBar,
+    private ngFireAuth: AngularFireAuth,
+    private fidgetSpinnerService: FidgetSpinnerService
   ) { }
 
   registerUser(authData: AuthData) {
@@ -26,6 +30,9 @@ export class AuthService {
       email: authData.email,
       userId: Math.round(Math.random() * 10000).toString()
     }; */
+    // !invoking the spinner
+    this.fidgetSpinnerService.spinnerStateChanged.next(true);
+
     this.ngFireAuth.auth.createUserWithEmailAndPassword(authData.email, authData.password)
       .then((result) => {
         console.log(result);
@@ -34,7 +41,12 @@ export class AuthService {
         // this.navigateToTraining();
       }).catch((err) => {
         console.log(err);
+        this.snackBar.open(err.message, null, { duration: 3000 });
+      }).finally(() => {
+        // !invoking the spinner
+        this.fidgetSpinnerService.spinnerStateChanged.next(false);
       });
+
   }
 
   login(authData: AuthData) {
@@ -42,6 +54,9 @@ export class AuthService {
        email: authData.email,
        userId: Math.round(Math.random() * 10000).toString()
      }; */
+    // !invoking the spinner
+    this.fidgetSpinnerService.spinnerStateChanged.next(true);
+
     this.ngFireAuth.auth.signInWithEmailAndPassword(authData.email, authData.password)
       .then((result) => {
         console.log(result);
@@ -50,6 +65,10 @@ export class AuthService {
         // this.navigateToTraining();
       }).catch((err) => {
         console.log(err);
+        this.snackBar.open(err.message, null, { duration: 3000 });
+      }).finally(() => {
+        // !invoking the spinner
+        this.fidgetSpinnerService.spinnerStateChanged.next(false);
       });
 
   }

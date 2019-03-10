@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { FidgetSpinnerService } from 'src/app/shared/components/fidget-spinner/fidget-spinner.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +11,17 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  isLoading: Observable<boolean> = of(false);
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private fidgetSpinnerService: FidgetSpinnerService
+  ) { }
 
   ngOnInit() {
+    // !SPinner
+    this.isLoading = this.fidgetSpinnerService.spinnerStateChanged;
+
     this.loginForm = new FormGroup({
       email: new FormControl('', {
         validators: [Validators.required, Validators.email]

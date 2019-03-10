@@ -22,9 +22,10 @@
     <!-- <mat-form-field> -->
     <mat-checkbox ngModel name="agree" required labelPosition="after" [color]="'primary'">Agree to Terms and Conditions</mat-checkbox>
     <!-- </mat-form-field> -->
-    <div fxLayout="row" fxFlexAlign="center">
+    <div *ngIf="!(isLoading | async)" fxLayout="row" fxFlexAlign="center">
       <button type="submit" mat-raised-button [color]="'primary'" [disabled]="myForm.invalid">Submit</button>
       <button fxFlexOffset="150px" type="reset" mat-raised-button [color]="'warn'">Cancel</button>
     </div>
+    <app-fidget-spinner *ngIf="(isLoading | async)"></app-fidget-spinner>
   </form>
 </section>

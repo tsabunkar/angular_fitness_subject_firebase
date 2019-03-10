@@ -4,20 +4,25 @@ import { CustomMaterialModule } from './modules/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { FirebaseModule } from './modules/firebase.module';
+import { FidgetSpinnerComponent } from './components/fidget-spinner/fidget-spinner.component';
 
 @NgModule({
-  declarations: [ConfirmDialogComponent],
+  declarations: [ConfirmDialogComponent, FidgetSpinnerComponent],
   imports: [
     CommonModule,
     FormsModule,
     FlexLayoutModule,
-    CustomMaterialModule
+    CustomMaterialModule,
+    FirebaseModule
   ],
   exports: [
+    FidgetSpinnerComponent,
     CommonModule,
     FormsModule,
     FlexLayoutModule,
-    CustomMaterialModule
+    CustomMaterialModule,
+    FirebaseModule
   ],
   // * Dialog Component is triggered @ runtime so, should be placed in entryComponents Array
   entryComponents: [
