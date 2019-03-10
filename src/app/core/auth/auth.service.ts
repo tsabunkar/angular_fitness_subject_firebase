@@ -31,7 +31,7 @@ export class AuthService {
         console.log(result);
 
         // navigate after registering the user
-        this.navigateToTraining();
+        // this.navigateToTraining();
       }).catch((err) => {
         console.log(err);
       });
@@ -47,7 +47,7 @@ export class AuthService {
         console.log(result);
 
         // navigate after login the user
-        this.navigateToTraining();
+        // this.navigateToTraining();
       }).catch((err) => {
         console.log(err);
       });
@@ -55,26 +55,39 @@ export class AuthService {
   }
 
   logout() {
-    // this.user = null;
-    this.isAuth = false;
-    this.userAuthenticationChanged.next(false); // logged out
-    // navigate after logout the user
-    this.router.navigate(['/signin']);
+    this.ngFireAuth.auth.signOut();
   }
 
-/*   getUser() {
-    return { ...this.user };
-  } */
+  /*   getUser() {
+      return { ...this.user };
+    } */
 
   isAuthenticated() {
     // return this.user != null;
     return this.isAuth;
   }
 
-  private navigateToTraining() {
+  /* private navigateToTraining() {
     this.isAuth = true;
     this.userAuthenticationChanged.next(true); // logged in
     this.router.navigate(['/training']);
+  }
+ */
+  initAuthListener() { // !We need to invoke this method, when application is first started
+    // authState-> is observable, it will emit the event whenever the authentication status has been changed
+    this.ngFireAuth.authState.subscribe(user => {
+      if (user) {  // if truthy user has logged in or registered
+        this.isAuth = true;
+        this.userAuthenticationChanged.next(true); // logged in
+        this.router.navigate(['/training']);
+      } else {
+        // this.user = null;
+        this.isAuth = false;
+        this.userAuthenticationChanged.next(false); // logged out
+        // navigate after logout the user
+        this.router.navigate(['/signin']);
+      }
+    });
   }
 
 }

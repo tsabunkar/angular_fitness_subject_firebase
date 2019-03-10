@@ -517,3 +517,34 @@ Goto firebase website : Authenication (tab) > Setup signin method (click) > Emai
 Enable > Save
 
 To see list of users register Goto :- Users (tab)
+
+-> Changing the RUles in Firebase for Authentication :
+Database (tab) > Rules > 
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write;
+    }
+  }
+}
+
+Above rules says that our protected resuorce can be accessed by any1. SO we need to set some rule i.e-
+
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+
+Provide protected resource only to :- request that are authenticated by firebase
+
+Publish (click)
+
+
+Note : Since we are using ANgularFire, So we developers no need to take tension about setting and passing, then verfiying the jwt token interaction b/w client and server for verification, It is take care by ANgularFire :)
+
+=====================================================================================================
